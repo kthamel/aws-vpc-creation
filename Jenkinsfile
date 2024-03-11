@@ -11,10 +11,12 @@ pipeline {
         
         stage('Terraform_Initialization') {
             steps {
-                dir('vpc_configuration') {
-                    sh '''
-                    terraform --version
-                    '''
+                withVault(configuration: [disableChildPoliciesOverride: false, engineVersion: 2, skipSslVerification: true, timeout: 60, vaultUrl: 'http://m2-fedair.39.local:8200'], vaultSecrets: [[path: 'aws-credentials/develop/', secretValues: [[vaultKey: 'AWS_ACCESS_KEY_ID'], [vaultKey: 'AWS_SECRET_ACCESS_KEY']]]]) {
+                    dir('vpc_configuration') {
+                        sh '''
+                        terraform --init
+                        '''
+                    }
                 }
             }
         }
