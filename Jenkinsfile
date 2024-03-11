@@ -11,7 +11,7 @@ pipeline {
         
         stage('Terraform_Initialization') {
             steps {
-                withVault(configuration: [disableChildPoliciesOverride: false, engineVersion: 2, skipSslVerification: true, timeout: 60, vaultUrl: 'http://m2-fedair.39.local:8200'], vaultSecrets: [[path: 'aws-credentials/develop/', secretValues: [[vaultKey: 'AWS_ACCESS_KEY_ID'], [vaultKey: 'AWS_SECRET_ACCESS_KEY']]]]) {
+                withVault(configuration: [disableChildPoliciesOverride: false, engineVersion: 2, skipSslVerification: true, timeout: 60, vaultUrl: 'http://m2-fedair.39.local:8200'], vaultSecrets: [[path: 'aws-credentials/develop/aws_access_key_id', secretValues: [[vaultKey: 'AWS_ACCESS_KEY_ID']]]]) {
                     dir('vpc_configuration') {
                         sh '''
                         terraform --init
