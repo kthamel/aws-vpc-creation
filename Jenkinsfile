@@ -11,10 +11,11 @@ pipeline {
         
         stage('Terraform_Initialization') {
             steps {
-                sh '''
-                    // terraform init
-                    terraform --version 
-                '''
+                dir('vpc_configuration') {
+                    sh '''
+                    terraform init
+                    '''
+                }
             }
         }
 
