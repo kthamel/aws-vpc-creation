@@ -13,7 +13,7 @@ pipeline {
             steps {
                 dir('vpc_configuration') {
                     sh '''
-                    terraform init
+                    terraform --version
                     '''
                 }
             }
@@ -21,28 +21,31 @@ pipeline {
 
         stage('Terraform_Format') {
             steps {
-                sh '''
-                    // terraform fmt .
+                dir('vpc_configuration') {
+                    sh '''
                     terraform --version
-                '''
+                    '''
+                }
             }
         }
 
         stage('Terraform_Validation') {
             steps {
-                sh '''
-                    // terraform validate
+                dir('vpc_configuration') {
+                    sh '''
                     terraform --version
-                '''
+                    '''
+                }
             }
         }
 
         stage('Terraform_Plan') {
             steps {
-                sh '''
-                    // terraform plan
+                dir('vpc_configuration') {
+                    sh '''
                     terraform --version
-                '''
+                    '''
+                }
             }
         }
 
