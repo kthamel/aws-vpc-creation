@@ -52,10 +52,11 @@ pipeline {
         stage('Terraform_Apply') {
             steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
-                sh '''
-                    // terraform apply
-                    terraform --version
-                '''
+                    dir('vpc_configuration') {
+                        sh '''
+                        terraform --version
+                    '''
+                }
             }
         }
     }
