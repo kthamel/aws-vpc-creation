@@ -2,7 +2,7 @@ def secrets = [
     [path: 'aws-credentials/develop/terraform', engineVersion: 2, secretValues: [
     [envVar: 'aws_access_key_id', vaultKey: 'aws_access_key_id'],
     [envVar: 'aws_secret_access_key', vaultKey: 'aws_secret_access_key'],
-    // [envVar: 'aws_region', vaultKey: 'aws_region']]],
+    [envVar: 'aws_region', vaultKey: 'aws_region']]],
 ]
 def configuration = [vaultUrl: 'http://m2-fedair.39.local:8200',  vaultCredentialId: 'vault-jenkins-role', engineVersion: 2]
 
