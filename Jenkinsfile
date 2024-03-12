@@ -21,9 +21,9 @@ pipeline {
             steps {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     dir('vpc_configuration') {
-                        sh '''
-                        terraform init
-                        '''
+                        sh "echo ${env.aws_access_key_id}"
+                        sh "echo ${env.aws_secret_access_key}"
+                        sh "echo ${env.aws_region}"
                     }
                 }  
             }
