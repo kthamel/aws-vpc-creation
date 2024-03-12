@@ -23,40 +23,49 @@ pipeline {
         
         stage('Terraform_Initialization') {
             steps {
-                dir('vpc_configuration') {
-                    sh '''
-                    terraform init
-                    '''
-                }
-            }  
+                withVault([configuration: configuration, vaultSecrets: secrets]) {
+                    dir('vpc_configuration') {
+                        sh '''
+                        terraform init
+                        '''
+                    }
+                }  
+            }
         }
 
         stage('Terraform_Format') {
             steps {
-                dir('vpc_configuration') {
-                    sh '''
-                    terraform --version
-                    '''
+                withVault([configuration: configuration, vaultSecrets: secrets]) {
+                    dir('vpc_configuration') {
+                        sh '''
+                        terraform fmt .
+                        '''
+                    }
                 }
+                
             }
         }
 
         stage('Terraform_Validation') {
             steps {
-                dir('vpc_configuration') {
-                    sh '''
-                    terraform --version
-                    '''
+                withVault([configuration: configuration, vaultSecrets: secrets]) {
+                    dir('vpc_configuration') {
+                        sh '''
+                        terraform validate
+                        '''
+                    }
                 }
             }
         }
 
         stage('Terraform_Plan') {
             steps {
-                dir('vpc_configuration') {
-                    sh '''
-                    terraform --version
-                    '''
+                withVault([configuration: configuration, vaultSecrets: secrets]) {
+                    dir('vpc_configuration') {
+                        sh '''
+                        terraform plan
+                        '''
+                    }
                 }
             }
         }
