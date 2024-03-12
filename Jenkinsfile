@@ -8,8 +8,8 @@ def configuration = [vaultUrl: 'http://m2-fedair.39.local:8200',  vaultCredentia
 
 pipeline {
     environment {
-       AWS_ACCESS_KEY_ID    = credentials('AWS_ACCESS_KEY_ID')
-       AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+       AWS_ACCESS_KEY_ID    = ${env.aws_access_key_id}
+       AWS_SECRET_ACCESS_KEY = ${env.aws_secret_access_key}
    }
     agent {label 'ansible'}
     stages {
@@ -25,9 +25,9 @@ pipeline {
             steps {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     dir('vpc_configuration') {
-                        sh "echo ${env.aws_access_key_id}"
-                        sh "echo ${env.aws_secret_access_key}"
-                        sh "echo ${env.aws_region}"
+                        sh '''
+                        terraform init
+                        '''
                     }
                 }  
             }
