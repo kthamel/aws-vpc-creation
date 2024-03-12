@@ -26,7 +26,7 @@ pipeline {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     dir('vpc_configuration') {
                         sh '''
-                        terraform init
+                        terraform init -upgrade
                         '''
                     }
                 }  
