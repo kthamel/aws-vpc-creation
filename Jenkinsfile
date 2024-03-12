@@ -23,14 +23,12 @@ pipeline {
         
         stage('Terraform_Initialization') {
             steps {
-                withVault([configuration: configuration, vaultSecrets: secrets]) {
-                    dir('vpc_configuration') {
-                        sh '''
-                        terraform init
-                        '''
-                    }
-                }  
-            }
+                dir('vpc_configuration') {
+                    sh '''
+                    terraform init
+                    '''
+                }
+            }  
         }
 
         stage('Terraform_Format') {
