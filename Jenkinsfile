@@ -7,6 +7,10 @@ def secrets = [
 def configuration = [vaultUrl: 'http://m2-fedair.39.local:8200',  vaultCredentialId: 'vault-jenkins-role', engineVersion: 2]
 
 pipeline {
+    environment {
+       AWS_ACCESS_KEY_ID    = credentials('AWS_ACCESS_KEY_ID')
+       AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+   }
     agent {label 'ansible'}
     stages {
         stage('Check_Dependencies'){
