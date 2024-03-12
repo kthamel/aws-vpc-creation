@@ -1,5 +1,5 @@
 def secrets = [
-  [path: 'aws-credentials/develop', engineVersion: 2, secretValues: [
+    [path: 'aws-credentials/develop', engineVersion: 2, secretValues: [
     [envVar: 'aws_access_key_id', vaultKey: 'private-token'],
     [envVar: 'aws_secret_access_key', vaultKey: 'public-token'],
     [envVar: 'aws_region', vaultKey: 'api-key']]],
@@ -19,11 +19,13 @@ pipeline {
         
         stage('Terraform_Initialization') {
             steps {
-                dir('vpc_configuration') {
-                    sh '''
-                    terraform init
-                    '''
-                }
+                withVault([configuration: configuration, vaultSecrets: secrets]) {
+                    dir('vpc_configuration') {
+                        sh '''
+                        terraform init
+                        '''
+                    }
+                }  
             }
         }
 
