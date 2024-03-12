@@ -1,3 +1,11 @@
+def secrets = [
+  [path: 'aws-credentials/develop', engineVersion: 2, secretValues: [
+    [envVar: 'aws_access_key_id', vaultKey: 'private-token'],
+    [envVar: 'aws_secret_access_key', vaultKey: 'public-token'],
+    [envVar: 'aws_region', vaultKey: 'api-key']]],
+]
+def configuration = [vaultUrl: 'http://m2-fedair.39.local:8200',  vaultCredentialId: 'vault-jenkins-role', engineVersion: 2]
+
 pipeline {
     agent {label 'ansible'}
     stages {
@@ -11,12 +19,10 @@ pipeline {
         
         stage('Terraform_Initialization') {
             steps {
-                withVault(configuration: [disableChildPoliciesOverride: false, engineVersion: 2, skipSslVerification: true, timeout: 60, vaultUrl: 'http://m2-fedair.39.local:8200'], vaultSecrets: [[path: 'aws-credentials/develop/aws_access_key_id', secretValues: [[vaultKey: 'aws_access_key_id']]]]) {
-                    dir('vpc_configuration') {
-                        sh '''
-                        terraform init
-                        '''
-                    }
+                dir('vpc_configuration') {
+                    sh '''
+                    terraform init
+                    '''
                 }
             }
         }
