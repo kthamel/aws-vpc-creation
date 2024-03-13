@@ -76,7 +76,8 @@ pipeline {
             }
             steps {
                 input {
-                    message "Are you sure to do that?"
+                message "Are you sure to do that?"
+                    id "InputMsg"
                     ok "Proceed"
                     submitter "DevOps"
                 }
