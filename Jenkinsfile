@@ -71,12 +71,12 @@ pipeline {
         }
 
         stage('Terraform_Apply') {
-            input {
-                message "Are you sure to do that?"
-                id "InputMsg"
-            }
             when {
                 branch 'main'
+            }
+            input {
+            message "Are you sure to do that?"
+                id "InputMsg"
             }
             steps {
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
