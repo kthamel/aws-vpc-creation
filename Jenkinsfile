@@ -76,10 +76,12 @@ pipeline {
             }
             steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
-                    dir('vpc_configuration') {
-                    sh '''
-                    terraform --version
-                    '''
+                    withVault([configuration: configuration, vaultSecrets: secrets]) {
+                        dir('vpc_configuration') {
+                        sh '''
+                        terraform --version
+                        '''
+                    }
                 }
             }            
         }
