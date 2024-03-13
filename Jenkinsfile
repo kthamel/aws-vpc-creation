@@ -72,10 +72,8 @@ pipeline {
 
         stage('Terraform_Apply') {
             when {
-                expression {
-                env.BRANCH_NAME == 'main';
+                branch 'main'
             }
-        }
         steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
                 dir('vpc_configuration') {
