@@ -72,7 +72,6 @@ pipeline {
 
         stage('Terraform_Apply') {
             when {
-            beforeInput true
             branch 'main'
         }
         input {
