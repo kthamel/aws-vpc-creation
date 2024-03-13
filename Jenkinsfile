@@ -75,10 +75,13 @@ pipeline {
                 beforeInput true
                 branch 'main'
             }
+            input {
+                message "Are you sure to do that?"
+                id "InputMsg"
+            }
             steps {
-                input id: 'InputMsg', message: 'Are you sure to do that?'
-                    withVault([configuration: configuration, vaultSecrets: secrets]) {
-                        dir('vpc_configuration') {
+                withVault([configuration: configuration, vaultSecrets: secrets]) {
+                    dir('vpc_configuration') {
                         sh '''
                         terraform --version
                         '''
