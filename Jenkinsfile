@@ -73,13 +73,13 @@ pipeline {
         stage('Terraform_Apply') {
             when {
                 expression {
-                return env.BRANCH_NAME == 'main';
+                env.BRANCH_NAME == 'main';
             }
         }
-        input {
-            message "Are you sure to do that?"
-            id "InputMsg"
-        }
+        // input {
+        //     message "Are you sure to do that?"
+        //     id "InputMsg"
+        // }
         steps {
                 dir('vpc_configuration') {
                     sh '''
