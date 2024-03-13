@@ -71,10 +71,10 @@ pipeline {
         }
 
         stage('Terraform_Apply') {
-            when {
-                beforeInput true
-                branch 'main'
-            }
+            // when {
+            //     beforeInput true
+            //     branch 'main'
+            // }
             input {
                 message "Are you sure to do that?"
                 id "InputMsg"
