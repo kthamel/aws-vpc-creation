@@ -73,7 +73,7 @@ pipeline {
         stage('Terraform_Apply') {
             when {
                 expression {
-                return env.BRANCH_NAME == 'main';
+                env.BRANCH_NAME == 'main';
             }
         }
         input {
