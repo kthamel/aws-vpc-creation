@@ -76,11 +76,8 @@ pipeline {
                 env.BRANCH_NAME == 'main';
             }
         }
-        // input {
-        //     message "Are you sure to do that?"
-        //     id "InputMsg"
-        // }
         steps {
+                input id: 'InputMsg', message: 'Are you sure to do that?'
                 dir('vpc_configuration') {
                     sh '''
                     terraform --version
