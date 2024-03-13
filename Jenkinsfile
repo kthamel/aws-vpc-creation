@@ -74,9 +74,9 @@ pipeline {
             when {
                 branch 'main'
             }
-        steps {
+            steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
-                dir('vpc_configuration') {
+                    dir('vpc_configuration') {
                     sh '''
                     terraform --version
                     '''
