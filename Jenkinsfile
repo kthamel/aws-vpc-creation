@@ -72,7 +72,9 @@ pipeline {
 
         stage('Terraform_Apply') {
             when {
-            branch 'main'
+                expression {
+                return env.BRANCH_NAME == 'main';
+            }
         }
         input {
             message "Are you sure to do that?"
