@@ -76,7 +76,6 @@ pipeline {
                 id "InputMsg"
             }
             when {
-                beforeInput true
                 branch 'main'
             }
             steps {
