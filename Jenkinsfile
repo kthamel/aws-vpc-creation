@@ -74,11 +74,12 @@ pipeline {
             when {
                 branch 'main'
             }
-            input {
-            message "Are you sure to do that?"
-                id "InputMsg"
-            }
             steps {
+                input {
+                    message "Are you sure to do that?"
+                    ok "Proceed"
+                    submitter "DevOps"
+                }
                 withVault([configuration: configuration, vaultSecrets: secrets]) {
                     dir('vpc_configuration') {
                         sh '''
