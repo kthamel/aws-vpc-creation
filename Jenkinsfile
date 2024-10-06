@@ -33,7 +33,7 @@ pipeline {
         stage('Terraform apply') {
             steps {
                 dir('vpc_configuration') {
-                    sh 'terraform apply --auto-approve',
+                    sh 'terraform apply --auto-approve'
                     sh 'sleep 600'
                 }
             }
