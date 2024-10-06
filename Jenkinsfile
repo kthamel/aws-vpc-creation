@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+        stage('Check files') {
+            steps {
+                echo 'ls -l'
+            }
+        }
+
         stage('Terraform Init') {
             steps {
                 sh 'terraform init -upgrade'
