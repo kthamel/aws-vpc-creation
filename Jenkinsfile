@@ -16,13 +16,19 @@ pipeline {
 
         stage('Terraform init') {
             steps {
-                sh 'terraform init -upgrade'
+                dir('vpc_configuration') {
+                    sh 'terraform init -upgrade'
+                }
+                
             }
         }
 
         stage('Terraform plan') {
             steps {
-                sh 'terraform plan'
+                dir('vpc_configuration') {
+                    sh 'terraform plan'
+                }
+                
             }
         }
 
