@@ -2,31 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('Terraform_Version_CHeck') {
+        stage('Terraform version') {
             steps {
-                echo 'terraform --version'
+                sh 'terraform --version'
             }
         }
 
         stage('Check files') {
             steps {
-                echo 'ls -l'
+                sh 'ls -l'
             }
         }
 
-        stage('Terraform Init') {
+        stage('Terraform init') {
             steps {
                 sh 'terraform init -upgrade'
             }
         }
 
-        stage('Terraform Plan') {
+        stage('Terraform plan') {
             steps {
-                echo 'terraform init'
+                sh 'terraform plan'
             }
         }
 
-        stage('Terraform Apply') {
+        stage('Terraform apply') {
             steps {
                 echo 'Hello World'
             }
