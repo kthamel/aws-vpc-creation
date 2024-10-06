@@ -19,7 +19,6 @@ pipeline {
                 dir('vpc_configuration') {
                     sh 'terraform init -upgrade'
                 }
-                
             }
         }
 
@@ -28,13 +27,23 @@ pipeline {
                 dir('vpc_configuration') {
                     sh 'terraform plan'
                 }
-                
             }
         }
 
         stage('Terraform apply') {
             steps {
-                echo 'Hello World'
+                dir('vpc_configuration') {
+                    sh 'terraform apply --auto-approve',
+                    sh 'sleep 600'
+                }
+            }
+        }
+
+        stage('Terraform destroy') {
+            steps {
+                dir('vpc_configuration') {
+                    sh 'terraform destroy --auto-approve'
+                }
             }
         }
     }

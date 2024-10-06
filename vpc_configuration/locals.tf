@@ -1,6 +1,6 @@
 locals {
-  Name    = "JENKINS_RESOURCE"
-  Project = "JENKINS_TERRAFORM"
+  Name    = "AWS_Infrastructure"
+  Project = "DevOps"
 }
 
 locals {
