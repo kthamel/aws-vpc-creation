@@ -30,10 +30,10 @@ pipeline {
             }
         }
 
-        stage('Terraform apply') {
+        stage('Terraform destroy') {
             steps {
                 dir('vpc_configuration') {
-                    sh 'terraform apply --auto-approve'
+                    sh 'terraform destroy --auto-approve'
                 }
             }
         }
