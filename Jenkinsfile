@@ -34,15 +34,6 @@ pipeline {
             steps {
                 dir('vpc_configuration') {
                     sh 'terraform apply --auto-approve'
-                    sh 'sleep 600'
-                }
-            }
-        }
-
-        stage('Terraform destroy') {
-            steps {
-                dir('vpc_configuration') {
-                    sh 'terraform destroy --auto-approve'
                 }
             }
         }
