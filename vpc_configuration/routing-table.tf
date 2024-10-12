@@ -49,7 +49,7 @@ resource "aws_route_table_association" "kthamel-ec2-rt-association-0" {
 
 resource "aws_route_table_association" "kthamel-ec2-rt-association-1" {
   subnet_id      = aws_subnet.kthamel-ec2-subnet-1.id
-  route_table_id = aws_route_table.kthamel-ec2-private-routing.id
+  route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
 
 resource "aws_route_table_association" "kthamel-ec2-rt-association-2" {
