@@ -43,11 +43,21 @@ resource "aws_route_table" "kthamel-ec2-public-routing" {
 }
 
 resource "aws_route_table_association" "kthamel-ec2-rt-association-0" {
-  subnet_id      = aws_subnet.kthamel-ec2-subnet-0.id
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-0a.id
   route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
 
 resource "aws_route_table_association" "kthamel-ec2-rt-association-1" {
-  subnet_id      = aws_subnet.kthamel-ec2-subnet-1.id
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-1a.id
+  route_table_id = aws_route_table.kthamel-ec2-public-routing.id
+}
+
+resource "aws_route_table_association" "kthamel-ec2-rt-association-0" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-0b.id
+  route_table_id = aws_route_table.kthamel-ec2-public-routing.id
+}
+
+resource "aws_route_table_association" "kthamel-ec2-rt-association-1" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-1b.id
   route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
