@@ -3,8 +3,7 @@ resource "aws_lb" "kthamel-eks-alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = aws_security_group.public-subnet-assoc.id
-
-  enable_deletetion_protection = false
+  enable_deletion_protection = false
 
   access_logs {
     bucket  = "kthamel-alb-access-logs"
