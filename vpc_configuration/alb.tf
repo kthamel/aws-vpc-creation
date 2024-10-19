@@ -2,7 +2,7 @@ resource "aws_lb" "kthamel-eks-alb" {
   name               = "kthamel-eks-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = "sg-06ef98d8997c35818"
+  security_groups    = ["sg-06ef98d8997c35818"]
   enable_deletion_protection = false
 
   access_logs {
