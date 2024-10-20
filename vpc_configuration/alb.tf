@@ -10,7 +10,7 @@ resource "aws_lb" "kthamel-alb" {
   access_logs {
     bucket  = "kthamel-alb-access-logs"
     prefix  = "eks-dev"
-    enabled = true
+    enabled = false
   }
 
   tags = local.common_tags
