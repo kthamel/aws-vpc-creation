@@ -13,7 +13,6 @@ resource "aws_lb" "kthamel-alb" {
     enabled = true
   }
 
-  tags = {
-    local.common_tags
-  }
+  tags = local.common_tags
+
 }
