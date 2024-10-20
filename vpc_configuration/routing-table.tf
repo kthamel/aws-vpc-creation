@@ -42,22 +42,27 @@ resource "aws_route_table" "kthamel-ec2-public-routing" {
   tags = local.common_tags
 }
 
-resource "aws_route_table_association" "kthamel-ec2-rt-association-0a" {
-  subnet_id      = aws_subnet.kthamel-ec2-subnet-0a.id
+resource "aws_route_table_association" "kthamel-ec2-subnet-pub-core" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-pub-core.id
   route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
 
-resource "aws_route_table_association" "kthamel-ec2-rt-association-1a" {
-  subnet_id      = aws_subnet.kthamel-ec2-subnet-1a.id
+resource "aws_route_table_association" "kthamel-ec2-rt-association-01" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-pri-01.id
   route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
 
-resource "aws_route_table_association" "kthamel-ec2-rt-association-0b" {
-  subnet_id      = aws_subnet.kthamel-ec2-subnet-0b.id
+resource "aws_route_table_association" "kthamel-ec2-rt-association-02" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-pri-02.id
   route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
 
-resource "aws_route_table_association" "kthamel-ec2-rt-association-1b" {
-  subnet_id      = aws_subnet.kthamel-ec2-subnet-1b.id
+resource "aws_route_table_association" "kthamel-ec2-rt-association-03" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-pub-01.id
+  route_table_id = aws_route_table.kthamel-ec2-public-routing.id
+}
+
+resource "aws_route_table_association" "kthamel-ec2-rt-association-04" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-pub-01.id
   route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
