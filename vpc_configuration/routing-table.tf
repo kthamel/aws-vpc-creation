@@ -42,8 +42,13 @@ resource "aws_route_table" "kthamel-ec2-public-routing" {
   tags = local.common_tags
 }
 
-resource "aws_route_table_association" "kthamel-ec2-subnet-pub-core" {
-  subnet_id      = aws_subnet.kthamel-ec2-subnet-pub-core.id
+resource "aws_route_table_association" "kthamel-ec2-subnet-pub-core-1a" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-pub-core-1a.id
+  route_table_id = aws_route_table.kthamel-ec2-public-routing.id
+}
+
+resource "aws_route_table_association" "kthamel-ec2-subnet-pub-core-1b" {
+  subnet_id      = aws_subnet.kthamel-ec2-subnet-pub-core-1b.id
   route_table_id = aws_route_table.kthamel-ec2-public-routing.id
 }
 
