@@ -1,4 +1,3 @@
-# Step 1: Define the S3 bucket
 resource "aws_s3_bucket" "kthamel-alb-access-logs" {
   bucket = "kthamel-alb-access-logs"
 
@@ -13,52 +12,23 @@ resource "aws_s3_bucket" "kthamel-alb-access-logs" {
   }
 }
 
-# Step 2: Define the bucket policy
-resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
+resource "aws_s3_bucket_policy" "kthamel-alb-access-logs-bucket-policy" {
   bucket = aws_s3_bucket.kthamel-alb-access-logs.id
-
   policy = jsonencode({
-    Version = "2012-10-17",
+    Version = "2012-10-17"
+    Id      = "kthamel-alb-access-logs-bucket-policy"
     Statement = [
       {
-        Effect = "Allow",
+        # Sid       = "IPAllow"
+        Effect = "Allow"
         Principal = {
-          Service = "logdelivery.elasticloadbalancing.amazonaws.com"
-        },
-        Action = "s3:PutObject",
-        Resource = "arn:aws:s3:::kthamel-alb-access-logs/alb-logs/*",
-        Condition = {
-          StringEquals = {
-            "s3:x-amz-acl" = "bucket-owner-full-control"
-          },
-          "ArnLike": {
-            "aws:SourceArn" = "arn:aws:elasticloadbalancing:us-east-1:533629863969:loadbalancer/app/eks-loadbalancer/*"
-          }
+          "AWS" : "arn:aws:iam::533629863969:root"
         }
-      },
-      {
-        Effect = "Allow",
-        Principal = {
-          Service = "logdelivery.elasticloadbalancing.amazonaws.com"
-        },
-        Action = "s3:PutObject",
-        Resource = "arn:aws:s3:::kthamel-alb-access-logs/*",
-        Condition = {
-          StringEquals = {
-            "s3:x-amz-acl" = "bucket-owner-full-control"
-          },
-          "ArnLike": {
-            "aws:SourceArn" = "arn:aws:elasticloadbalancing:us-east-1:533629863969:loadbalancer/app/eks-loadbalancer/*"
-          }
-        }
-      },
-      {
-        Effect = "Allow",
-        Action = "s3:ListBucket",
-        Principal = {
-          Service = "logdelivery.elasticloadbalancing.amazonaws.com"
-        },
-        Resource = "arn:aws:s3:::kthamel-alb-access-logs"
+        Action = "s3:*"
+        Resource = [
+          aws_s3_bucket.kthamel-alb-access-logs.arn,
+          "${aws_s3_bucket.kthamel-alb-access-logs.arn}/*"
+        ]
       }
     ]
   })
