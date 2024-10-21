@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "kthamel-alb-access-logs" {
 
 # Step 2: Define the bucket policy
 resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
-  bucket = aws_s3_bucket.alb_access_logs.id
+  bucket = aws_s3_bucket.kthamel-alb-access-logs.id
 
   policy = jsonencode({
     Version = "2012-10-17",
