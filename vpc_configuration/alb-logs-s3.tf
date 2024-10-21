@@ -1,5 +1,5 @@
 # Step 1: Define the S3 bucket
-resource "aws_s3_bucket" "alb_access_logs" {
+resource "aws_s3_bucket" "kthamel-alb-access-logs" {
   bucket = "kthamel-alb-access-logs"
 
   versioning {
