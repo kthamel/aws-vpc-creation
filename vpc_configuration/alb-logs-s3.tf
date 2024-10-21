@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "us-east-1"  # Set your AWS region
-}
-
 # Step 1: Define the S3 bucket
 resource "aws_s3_bucket" "alb_access_logs" {
   bucket = "kthamel-alb-access-logs"
