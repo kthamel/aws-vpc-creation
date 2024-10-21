@@ -8,7 +8,7 @@ resource "aws_lb" "kthamel-alb" {
   
   access_logs {
     bucket  = aws_s3_bucket.kthamel-alb-access-logs.id
-    prefix  = "AWSLogs"
+    prefix  = "alb-logs"
     enabled = true
   }
 

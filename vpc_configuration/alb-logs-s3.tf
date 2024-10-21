@@ -15,7 +15,7 @@ resource "aws_s3_bucket_policy" "allow_alb_logging" {
         "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
       },
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::kthamel-alb-access-logs/AWSLogs/*",
+      "Resource": "arn:aws:s3:::kthamel-alb-access-logs/alb-logs/*",
       "Condition": {
         "StringEquals": {
           "s3:x-amz-acl": "bucket-owner-full-control"
