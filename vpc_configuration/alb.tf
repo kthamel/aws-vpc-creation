@@ -1,6 +1,5 @@
 resource "aws_lb" "kthamel-alb" {
   name               = "EKS-Loadbalancer"
-  depends_on         = aws_s3_bucket.kthamel-alb-access-logs.id
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.public-subnet-assoc.id]
