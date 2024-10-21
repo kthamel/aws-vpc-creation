@@ -1,5 +1,5 @@
 resource "aws_lb" "kthamel-alb" {
-  name               = "EKS-Loadbalancer"
+  name               = "eks-loadbalancer"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.public-subnet-assoc.id]

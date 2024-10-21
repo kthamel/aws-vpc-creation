@@ -1,5 +1,9 @@
+provider "aws" {
+  region = "us-east-1"  # Set your AWS region
+}
+
 # Step 1: Define the S3 bucket
-resource "aws_s3_bucket" "kthamel-alb-access-logs" {
+resource "aws_s3_bucket" "alb_access_logs" {
   bucket = "kthamel-alb-access-logs"
 
   versioning {
@@ -8,12 +12,14 @@ resource "aws_s3_bucket" "kthamel-alb-access-logs" {
 
   acl = "private"
 
-  tags = local.common_tags
+  tags = {
+    Name = "ALB Access Logs Bucket"
+  }
 }
 
 # Step 2: Define the bucket policy
 resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
-  bucket = aws_s3_bucket.kthamel-alb-access-logs.id
+  bucket = aws_s3_bucket.alb_access_logs.id
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -28,6 +34,9 @@ resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
         Condition = {
           StringEquals = {
             "s3:x-amz-acl" = "bucket-owner-full-control"
+          },
+          "ArnLike": {
+            "aws:SourceArn" = "arn:aws:elasticloadbalancing:us-east-1:533629863969:loadbalancer/app/eks-loadbalancer/*"
           }
         }
       },
@@ -41,6 +50,9 @@ resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
         Condition = {
           StringEquals = {
             "s3:x-amz-acl" = "bucket-owner-full-control"
+          },
+          "ArnLike": {
+            "aws:SourceArn" = "arn:aws:elasticloadbalancing:us-east-1:533629863969:loadbalancer/app/eks-loadbalancer/*"
           }
         }
       },
@@ -55,5 +67,3 @@ resource "aws_s3_bucket_policy" "alb_access_logs_policy" {
     ]
   })
 }
-
-
