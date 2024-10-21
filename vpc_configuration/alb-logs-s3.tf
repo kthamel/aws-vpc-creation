@@ -7,18 +7,45 @@ resource "aws_s3_bucket" "kthamel-alb-access-logs" {
 resource "aws_s3_bucket_policy" "allow_alb_logging" {
   bucket = aws_s3_bucket.kthamel-alb-access-logs.id
   policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          AWS = "arn:aws:iam::533629863969:root"
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::kthamel-alb-access-logs/AWSLogs/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-acl": "bucket-owner-full-control"
         }
-        Action = "s3:PutObject"
-        Resource = "${aws_s3_bucket.kthamel-alb-access-logs.arn}/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
       }
-    ]
-  })
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::kthamel-alb-access-logs/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Principal": {
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
+      },
+      "Resource": "arn:aws:s3:::kthamel-alb-access-logs"
+    }
+  ]
+}
+)
 }
 
 data "aws_caller_identity" "current" {}
