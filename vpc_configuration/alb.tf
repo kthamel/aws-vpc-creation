@@ -9,7 +9,7 @@ resource "aws_lb" "kthamel-alb" {
   access_logs {
     bucket  = aws_s3_bucket.kthamel-alb-access-logs.id
     prefix  = "alb-logs"
-    enabled = true
+    enabled = disable
   }
 
   tags = local.common_tags
