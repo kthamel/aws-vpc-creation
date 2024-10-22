@@ -19,7 +19,6 @@ resource "aws_s3_bucket_policy" "kthamel-alb-access-logs-bucket-policy" {
     Id      = "kthamel-alb-access-logs-bucket-policy"
     Statement = [
       {
-        # Sid       = "IPAllow"
         Effect = "Allow"
         Principal = {
           "AWS" : "arn:aws:iam::533629863969:root"
