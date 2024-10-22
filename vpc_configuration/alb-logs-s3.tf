@@ -24,16 +24,17 @@ resource "aws_s3_bucket_policy" "kthamel-alb-access-logs-bucket-policy" {
           "Service" : "elasticloadbalancing.amazonaws.com"
         },
         "Action" : "s3:PutObject",
-        "Resource" : "${aws_s3_bucket.kthamel-alb-access-logs.arn}/*",
+        "Resource" : "arn:aws:s3:::kthamel-alb-access-logs/*",
         "Condition" : {
           "StringEquals" : {
             "aws:SourceAccount" : 533629863969
           },
           "ArnLike" : {
-            "aws:SourceArn" : "arn:aws:elasticloadbalancing:us-east-1:533629863969:loadbalancer/app/*"
+            "aws:SourceArn" : "arn:aws:elasticloadbalancing:us-east-1:533629863969:loadbalancer/*"
           }
         }
       }
     ]
   })
 }
+
