@@ -14,27 +14,21 @@ resource "aws_s3_bucket" "kthamel-alb-access-logs" {
 
 resource "aws_s3_bucket_policy" "kthamel-alb-access-logs-bucket-policy" {
   bucket = aws_s3_bucket.kthamel-alb-access-logs.id
-
   policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Principal" : {
-          "Service" : "elasticloadbalancing.amazonaws.com"
-        },
-        "Action" : "s3:PutObject",
-        "Resource" : "arn:aws:s3:::kthamel-alb-access-logs/*",
-        "Condition" : {
-          "StringEquals" : {
-            "aws:SourceAccount" : 533629863969
-          },
-          "ArnLike" : {
-            "aws:SourceArn" : "arn:aws:elasticloadbalancing:us-east-1:533629863969:loadbalancer/*"
-          }
-        }
+  "Id": "Policy1729689145524",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1729689143218",
+      "Action": "s3:*",
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::kthamel-alb-access-logs/alb-logs",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::533629863969:*"
+        ]
       }
-    ]
-  })
+    }
+  ]
+})
 }
-
