@@ -23,7 +23,7 @@ resource "aws_s3_bucket_policy" "kthamel-alb-access-logs-bucket-policy" {
       "Action": "s3:*",
       "Effect": "Allow",
       "Resource": "arn:aws:s3:::kthamel-alb-access-logs/alb-logs",
-      "Principal": {"*"}
+      "Principal": "*"
     }
   ]
 })
